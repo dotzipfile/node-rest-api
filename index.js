@@ -34,7 +34,7 @@ const server = http.createServer(function(req, res) {
     // Send a response
     res.end("Hello world!\n");
 
-    // Log path
+    // Log information
     console.log("Request payload: ", buffer);
   
   });
