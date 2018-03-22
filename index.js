@@ -6,25 +6,38 @@
 // Dependencies
 const http = require('http');
 const url = require('url');
+const stringDecoder = require('string_decoder').StringDecoder;
 
 // Config variables
 const port = 3000;
 
 const server = http.createServer(function(req, res) {
 
-  // Parse incoming URL using "query string"
+  // Get URL, trimmed path, query string, HTTP method and headers
   var parsedUrl = url.parse(req.url, true);
-
-  // Get untrimmed path and trim it
   var path = parsedUrl.pathname;
   var trimmedPath = path.replace(/^\/+|\/+$/g, '');
+  var queryStringObject = parsedUrl.query;
+  var method = req.method.toLowerCase();
+  var headers = req.headers;
 
-  // Send a response
-  res.end("Hello world!\n");
+  // Get payload
+  var decoder = new stringDecoder('utf-8');
+  var buffer = '';
+  req.on('data', function(data){
+    buffer += decoder.write(data);
+  });
 
-  // Log path
-  console.log("Request received on path: " + trimmedPath);
+  req.on('end', function() {
+    buffer += decoder.end();
+    
+    // Send a response
+    res.end("Hello world!\n");
 
+    // Log path
+    console.log("Request payload: ", buffer);
+  
+  });
 });
 
 server.listen(port, function() {
