@@ -4,14 +4,12 @@
  */
 
 // Dependencies
-const http = require('http');
-const url = require('url');
-const stringDecoder = require('string_decoder').StringDecoder;
+var http = require('http');
+var url = require('url');
+var stringDecoder = require('string_decoder').StringDecoder;
+var config = require('./config');
 
-// Config variables
-const port = 3000;
-
-const server = http.createServer(function(req, res) {
+var server = http.createServer(function(req, res) {
 
   // Get URL, trimmed path, query string, HTTP method and headers
   var parsedUrl = url.parse(req.url, true);
@@ -64,8 +62,9 @@ const server = http.createServer(function(req, res) {
   });
 });
 
-server.listen(port, function() {
-  console.log("Listening on port 3000...");
+// Start the server
+server.listen(config.port, function() {
+  console.log("Listening on port " + config.port + " in " + config.envName + " mode...");
 });
 
 // Handlers
