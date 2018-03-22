@@ -30,16 +30,55 @@ const server = http.createServer(function(req, res) {
 
   req.on('end', function() {
     buffer += decoder.end();
-    
-    // Send a response
-    res.end("Hello world!\n");
 
-    // Log information
-    console.log("Request payload: ", buffer);
-  
+    // Choose handler
+    var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+
+    // Construct data
+    var data = {
+      trimmedPath: trimmedPath,
+      queryStringObject: queryStringObject,
+      method: method,
+      header: headers,
+      payload: buffer
+    };
+    
+    // Route request to correct handler
+    chosenHandler(data, function(statusCode, payload) {
+      // Set returned or default status code
+      statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
+
+      // Set returned or default payload
+      payload = typeof(payload) == 'object' ? payload : {};
+
+      var payloadString = JSON.stringify(payload);
+
+      // Send response
+      res.writeHead(statusCode);
+      res.end(payloadString);
+
+      // Log information
+      console.log("Returning response: ", statusCode, payloadString);
+    });
   });
 });
 
 server.listen(port, function() {
   console.log("Listening on port 3000...");
 });
+
+// Handlers
+var handlers = {};
+
+handlers.sample = function(data, callback) {
+  callback(406, {'name': 'sample handler'});
+};
+
+handlers.notFound = function(data, callback) {
+  callback(404);
+};
+
+// Request router
+var router = {
+  'sample': handlers.sample
+};
