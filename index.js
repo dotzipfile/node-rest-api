@@ -92,15 +92,17 @@ var unifiedServer = function(req, res) {
 // Handlers
 var handlers = {};
 
-handlers.sample = function(data, callback) {
-  callback(406, {'name': 'sample handler'});
+// Ping handler
+handlers.ping = function(data, callback) {
+  callback(200);
 };
 
+// 404 handler
 handlers.notFound = function(data, callback) {
   callback(404);
 };
 
 // Request router
 var router = {
-  'sample': handlers.sample
+  ping: handlers.ping
 };
