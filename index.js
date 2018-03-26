@@ -14,8 +14,8 @@ var _data = require('./lib/data');
 
 // TESTING
 // @TODO delete this
-_data.create('test', 'newFile', { foo: 'bar' }, function(err) {
-  console.log('Error: ', err);
+_data.read('test', 'newFile', function(err, data) {
+  console.log('Error: ', err, ' Data: ', data);
 });
 
 // Instantiate http server
