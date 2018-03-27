@@ -1,0 +1,1 @@
+Directory for user checks storage
