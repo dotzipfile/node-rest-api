@@ -1,2 +1,3 @@
 data/*/*.json
 twilio-auth-obj.json
+logs/*
