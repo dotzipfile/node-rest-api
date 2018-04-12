@@ -28,6 +28,5 @@ app.init = function(){
 // Self executing
 app.init();
 
-
 // Export the app
 module.exports = app;
