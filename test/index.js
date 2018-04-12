@@ -3,38 +3,14 @@
  * 
  */
 
-// Dependencies
-var helpers = require('./../lib/helpers');
-var assert = require('assert');
-
 // Application log for the test runner
 _app = {};
 
 // Container for the tests
-_app.tests = {
-  unit: {}
-};
+_app.tests = {};
 
-// Assert that the getANumber is returning a number
-_app.tests.unit['helplers.getANumber should return a number'] = function(done) {
-  var val = helpers.getANumber();
-  assert.equal(typeof(val), 'number');
-  done();
-};
-
-// Assert that the getANumber is returning a 1
-_app.tests.unit['helplers.getANumber should return 1'] = function(done) {
-  var val = helpers.getANumber();
-  assert.equal(val, 1);
-  done();
-};
-
-// Assert that the getANumber is returning a 2
-_app.tests.unit['helplers.getANumber should return 2'] = function(done) {
-  var val = helpers.getANumber();
-  assert.equal(val, 2);
-  done();
-};
+// Add unit tests
+_app.tests.unit = require('./unit');
 
 // Count all the tests
 _app.countTests = function() {
