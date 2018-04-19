@@ -3,6 +3,7 @@
  * 
  */
 
+// Dependencies
 var http2 = require('http2');
 
 // Create client
