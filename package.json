@@ -1,0 +1,26 @@
+{
+  "name": "node-rest-api",
+  "version": "1.0.0",
+  "description": "Rest api for watching the uptime of URLs",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotzipfile/node-rest-api.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dotzipfile/node-rest-api/issues"
+  },
+  "homepage": "https://github.com/dotzipfile/node-rest-api#readme",
+  "dependencies": {
+    "mongodb": "^3.0.7"
+  }
+}
