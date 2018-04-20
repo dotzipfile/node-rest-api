@@ -1,3 +1,4 @@
 data/*/*.json
 twilio-auth-obj.json
 logs/*
+node_modules/
